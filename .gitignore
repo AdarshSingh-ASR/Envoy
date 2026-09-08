@@ -1,0 +1,21 @@
+# python
+__pycache__/
+*.py[cod]
+.venv/
+*.db
+sessions/
+.env
+
+# node
+node_modules/
+dist/
+
+# editors / os
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# test scratch
+test_*.py
+!test_negotiation.py
