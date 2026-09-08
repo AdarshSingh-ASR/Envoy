@@ -98,3 +98,9 @@ def respond(did: str, body: DecisionIn) -> dict:
 @app.get("/api/ledger")
 def ledger() -> dict:
     return {"saved": store.total_saved(), "settlements": store.list_settlements()}
+
+
+@app.post("/api/reset")
+def reset() -> dict:
+    store.reset_all()
+    return {"ok": True}

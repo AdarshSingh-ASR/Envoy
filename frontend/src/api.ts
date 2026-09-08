@@ -32,6 +32,7 @@ export const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action, note }),
     }).then((r) => j<{ ok: boolean }>(r)),
+  reset: () => fetch("/api/reset", { method: "POST" }).then((r) => j<{ ok: boolean }>(r)),
   ledger: () =>
     fetch("/api/ledger").then((r) =>
       j<{ saved: Record<string, number>; settlements: Settlement[] }>(r),

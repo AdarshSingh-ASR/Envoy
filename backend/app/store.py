@@ -209,3 +209,13 @@ def list_settlements(nid: str | None = None) -> list[dict[str, Any]]:
 def total_saved() -> dict[str, float]:
     rows = _db().execute("SELECT currency, SUM(amount) AS total FROM settlements GROUP BY currency").fetchall()
     return {r["currency"]: r["total"] for r in rows}
+
+
+def reset_all() -> None:
+    """Wipe negotiations, turns, decisions and settlements (demo reset)."""
+    with _lock:
+        _db().execute("DELETE FROM turns")
+        _db().execute("DELETE FROM decisions")
+        _db().execute("DELETE FROM settlements")
+        _db().execute("DELETE FROM negotiations")
+        _db().commit()

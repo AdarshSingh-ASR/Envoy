@@ -264,6 +264,13 @@ export default function App() {
     await refreshLists();
   };
 
+  const clearLedger = async () => {
+    await api.reset();
+    setSelected(null);
+    setTurns([]);
+    await refreshLists();
+  };
+
   const savedStr =
     Object.entries(saved)
       .map(([cur, v]) => `${cur} ${v.toLocaleString()}`)
@@ -320,11 +327,22 @@ export default function App() {
       {/* ------- three columns ------- */}
       <div className="grid min-h-0 flex-1 grid-cols-[240px_1fr_300px]">
         {/* dispute ledger */}
-        <aside className="min-h-0 overflow-y-auto border-r" style={{ borderColor: ink, background: panel }}>
-          <div className="font-mono2 sticky top-0 border-b px-4 py-2 text-[9.5px] font-semibold" style={{ borderColor: ink, background: panel, color: muted }}>
-            01 — Dispute ledger
+        <aside className="flex min-h-0 flex-col border-r" style={{ borderColor: ink, background: panel }}>
+          <div
+            className="font-mono2 sticky top-0 z-10 flex shrink-0 items-center justify-between border-b px-4 py-2 text-[9.5px] font-semibold"
+            style={{ borderColor: ink, background: panel, color: muted }}
+          >
+            <span>01 — Dispute ledger</span>
+            <button
+              onClick={clearLedger}
+              className="font-semibold transition hover:opacity-60"
+              style={{ color: "var(--accent)" }}
+              title="Wipe all negotiations and the savings ledger"
+            >
+              Clear ✕
+            </button>
           </div>
-          <div className="p-3">
+          <div className="min-h-0 flex-1 overflow-y-auto p-3">
             {negotiations.map((n, i) => {
               const s = STATUS_META[n.status] ?? { label: n.status };
               const active = n.id === selected;
@@ -353,7 +371,7 @@ export default function App() {
           </div>
 
           {/* composer */}
-          <div className="border-t p-4" style={{ borderColor: ink }}>
+          <div className="shrink-0 border-t p-4" style={{ borderColor: ink }}>
             <div className="font-mono2 mb-2 text-[9.5px] font-semibold" style={{ color: muted }}>02 — File a dispute</div>
             <div className="mb-2 flex flex-wrap gap-1">
               <button
