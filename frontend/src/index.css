@@ -1,7 +1,29 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------- paper theme -- */
 :root {
+  color-scheme: light;
+  --paper: #f2eee4;      /* page */
+  --panel: #ece7da;      /* sidebar panels */
+  --soft: #e6dfd0;       /* chips / fills */
+  --ink: #17130d;        /* text + rules */
+  --muted: #6e6858;
+  --faint: #9a937f;
+  --accent: #d92d20;     /* vermilion */
+  --accent-soft: #f6ded9;
+  --ok: #1c6b3c;
+}
+[data-theme="ink"] {
   color-scheme: dark;
+  --paper: #131009;
+  --panel: #181510;
+  --soft: #211d15;
+  --ink: #ece7da;
+  --muted: #97907e;
+  --faint: #6e6858;
+  --accent: #ff5a45;
+  --accent-soft: #33170f;
+  --ok: #7fd6a4;
 }
 
 html,
@@ -12,18 +34,34 @@ body,
 
 body {
   margin: 0;
-  background: #0a0d12;
-  color: #e6e9ef;
-  font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+
+.font-display {
+  font-family: "Playfair Display", Georgia, serif;
+}
+.font-body {
+  font-family: "Source Serif 4", Georgia, serif;
+}
+.font-mono2 {
+  font-family: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rule {
+  border-color: var(--ink);
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #232a36;
-  border-radius: 8px;
+  background: var(--faint);
+  border: 2px solid var(--paper);
 }
 ::-webkit-scrollbar-track {
   background: transparent;
